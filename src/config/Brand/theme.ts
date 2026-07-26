@@ -236,7 +236,7 @@ class Theme {
     );
   }
 
-  static get theme() {
+  static getTheme() {
     const name = Theme._theme();
 
     return {

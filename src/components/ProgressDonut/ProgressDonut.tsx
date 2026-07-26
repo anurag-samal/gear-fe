@@ -2,9 +2,12 @@ import { Show, splitProps } from "solid-js";
 
 import type { ProgressDonutProps } from "./ProgressDonut.types";
 
-import { THEME } from "../../config/Brand/all";
+import { Theme } from "../../config/Brand/index";
 
 export default function ProgressDonut(props: ProgressDonutProps) {
+
+  const theme = Theme.getTheme();
+
   const [args, nativeProps] = splitProps(props, [
     "value",
     "max",
@@ -56,7 +59,7 @@ export default function ProgressDonut(props: ProgressDonutProps) {
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke={THEME.primary}
+          stroke={theme.primary}
           stroke-width={thickness}
           stroke-linecap="round"
           stroke-dasharray={`${circumference}`}

@@ -10,7 +10,7 @@ import {
   INPUT_LABEL_CLASS,
   INPUT_SIZES,
   INPUT_WRAPPER_CLASS,
-} from "./Input.logic";
+} from "./Input.styles";
 
 export default function Input(props: InputProps) {
   const [args, nativeProps] = splitProps(props, [
