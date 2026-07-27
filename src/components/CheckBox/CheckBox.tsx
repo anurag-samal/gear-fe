@@ -9,7 +9,7 @@ import {
   CHECKBOX_LABEL_CLASS,
   CHECKBOX_HELPER_CLASS,
   CHECKBOX_ERROR_CLASS,
-} from "./CheckBox.logic";
+} from "./CheckBox.styles";
 
 export default function Checkbox(props: CheckboxProps) {
   const [args, nativeProps] = splitProps(props, [

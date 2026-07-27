@@ -1,6 +1,8 @@
-import { THEME } from "../../config/Brand/all";
+import {Theme} from "../../config/Brand/index";
 
 import type { SpinnerColor, SpinnerSize } from "./Spinner.types";
+
+const theme = Theme.getTheme();
 
 export const SPINNER_BASE_CLASS = `
 inline-block
@@ -35,7 +37,7 @@ export const SPINNER_STYLES: Record<
   },
 
   primary: {
-    borderColor: THEME.primary,
+    borderColor: theme.primary,
     borderTopColor: "transparent",
   },
 };

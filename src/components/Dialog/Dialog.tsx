@@ -2,7 +2,7 @@ import * as KDialog from "@kobalte/core/dialog";
 
 import { For, Show } from "solid-js";
 
-import { Button } from "../Button/Button";
+import Button from "../Button/Button";
 import { Icon } from "../Icon";
 
 import type { DialogProps } from "./Dialog.types";

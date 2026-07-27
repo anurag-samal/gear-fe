@@ -2,7 +2,7 @@ import { Match, Switch, createMemo, splitProps } from "solid-js";
 
 import type { AvatarProps } from "./Avatar.types";
 
-import { AVATAR_SIZES, BASE_AVATAR_CLASS, getInitials } from "./Avatar.logic";
+import { AVATAR_SIZES, BASE_AVATAR_CLASS, getInitials } from "./Avatar.styles";
 
 export default function Avatar(props: AvatarProps) {
   const [args, nativeProps] = splitProps(props, [

@@ -11,7 +11,7 @@ import {
   TEXTAREA_ERROR_CLASS,
   TEXTAREA_SIZES,
   TEXTAREA_RESIZE,
-} from "./TextArea.logic";
+} from "./TextArea.styles";
 
 export default function TextArea(props: TextAreaProps) {
   const [args, nativeProps] = splitProps(props, [

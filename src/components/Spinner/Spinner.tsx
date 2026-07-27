@@ -6,7 +6,7 @@ import {
   SPINNER_BASE_CLASS,
   SPINNER_SIZES,
   SPINNER_STYLES,
-} from "./Spinner.logic";
+} from "./Spinner.styles";
 
 export default function Spinner(props: SpinnerProps) {
   const [args, nativeProps] = splitProps(props, ["size", "color", "class"]);

@@ -11,7 +11,7 @@ import {
   SWITCH_LABEL_CLASS,
   SWITCH_HELPER_CLASS,
   SWITCH_ERROR_CLASS,
-} from "./Switch.logic";
+} from "./Switch.styles";
 
 export default function Switch(props: SwitchProps) {
   const [args, nativeProps] = splitProps(props, [

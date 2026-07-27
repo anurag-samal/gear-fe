@@ -7,7 +7,7 @@ import {
   BADGE_SHAPES,
   BADGE_SIZES,
   BADGE_STYLES,
-} from "./Badge.logic";
+} from "./Badge.styles";
 
 export default function Badge(props: BadgeProps) {
   const [args, nativeProps] = splitProps(props, [

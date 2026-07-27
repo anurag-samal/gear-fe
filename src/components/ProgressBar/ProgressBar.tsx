@@ -4,7 +4,9 @@ import type { JSX } from "solid-js";
 
 import type { ProgressProps } from "./ProgressBar.types";
 
-import { THEME } from "../../config/Brand/all";
+import {Theme}  from "../../config/Brand/index";
+
+const theme = Theme.getTheme();
 
 const BASE_PROGRESS_CLASS = `
 w-full
@@ -51,7 +53,7 @@ export default function Progress(props: ProgressProps) {
 
   const progressBarStyle: JSX.CSSProperties = {
     width: `${percentage}%`,
-    "background-color": THEME.primary,
+    "background-color": theme.primary,
   };
 
   return (
