@@ -13,7 +13,7 @@
   "dependencies": {
     "@kobalte/core": "^0.13.12",
     "@solidjs/router": "^0.15.0",
-    "@solidjs/start": "2.0.0-alpha.2",
+    "@solidjs/start": "2.0.0-rc.5",
     "@solidjs/vite-plugin-nitro-2": "^0.1.0",
     "@tanstack/solid-table": "^8.21.3",
     "@tanstack/solid-virtual": "^3.13.33",
@@ -32,6 +32,11 @@
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.10",
     "whatwg-url": "^17.1.0"
+  },
+  "overrides": {
+    "brace-expansion": "5.0.8",
+    "postcss": "8.5.23",
+    "tar": "7.5.22"
   },
   "engines": {
     "node": ">=22"
