@@ -1,33 +1,12 @@
 import { Show, splitProps } from "solid-js";
-
 import type { JSX } from "solid-js";
-
 import type { ProgressProps } from "./ProgressBar.types";
-
+import { BASE_PROGRESS_BAR_CLASS, BASE_PROGRESS_CLASS } from "./ProgressBar.styles";
 import {Theme}  from "../../config/Brand/index";
 
 const theme = Theme.getTheme();
 
-const BASE_PROGRESS_CLASS = `
-w-full
-
-overflow-hidden
-
-rounded-full
-
-bg-zinc-200
-`;
-
-const BASE_PROGRESS_BAR_CLASS = `
-h-full
-
-rounded-full
-
-transition-all
-duration-300
-`;
-
-export default function Progress(props: ProgressProps) {
+export function Progress(props: ProgressProps) {
   const [args, nativeProps] = splitProps(props, [
     "value",
     "max",

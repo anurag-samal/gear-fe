@@ -12,7 +12,7 @@ import {
   INPUT_WRAPPER_CLASS,
 } from "./Input.styles";
 
-export default function Input(props: InputProps) {
+export function Input(props: InputProps) {
   const [args, nativeProps] = splitProps(props, [
     "label",
     "helperText",

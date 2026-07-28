@@ -13,7 +13,7 @@ import {
   SWITCH_ERROR_CLASS,
 } from "./Switch.styles";
 
-export default function Switch(props: SwitchProps) {
+export function Switch(props: SwitchProps) {
   const [args, nativeProps] = splitProps(props, [
     "label",
     "helperText",

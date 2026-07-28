@@ -13,7 +13,7 @@ import {
   TEXTAREA_RESIZE,
 } from "./TextArea.styles";
 
-export default function TextArea(props: TextAreaProps) {
+export function TextArea(props: TextAreaProps) {
   const [args, nativeProps] = splitProps(props, [
     "label",
     "helperText",

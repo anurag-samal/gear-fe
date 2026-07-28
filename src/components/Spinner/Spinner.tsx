@@ -8,7 +8,7 @@ import {
   SPINNER_STYLES,
 } from "./Spinner.styles";
 
-export default function Spinner(props: SpinnerProps) {
+export function Spinner(props: SpinnerProps) {
   const [args, nativeProps] = splitProps(props, ["size", "color", "class"]);
 
   const spinnerClass = `

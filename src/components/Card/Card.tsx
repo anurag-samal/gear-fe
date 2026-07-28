@@ -1,20 +1,61 @@
-import { splitProps } from "solid-js";
+import type {
+  CardBodyProps,
+  CardFooterProps,
+  CardHeaderProps,
+  CardProps,
+} from "./Card.types";
 
-import type { CardComponentProps } from "./Card.types";
+import { CARD_STYLES } from "./Card.styles";
 
-import { CARD_CLASS } from "./Card.logic";
-
-export default function Card(props: CardComponentProps) {
-  const [args, nativeProps] = splitProps(props, ["children", "class"]);
-
-  const cardClass = `
-    ${CARD_CLASS}
-    ${args.class ?? ""}
-  `;
-
+export function Card(props: CardProps) {
   return (
-    <div {...nativeProps} class={cardClass}>
-      {args.children}
+    <div
+      class={`
+        ${CARD_STYLES.root}
+        ${props.class ?? ""}
+      `}
+    >
+      {props.children}
     </div>
   );
 }
+
+export function CardHeader(props: CardHeaderProps) {
+  return (
+    <div
+      class={`
+        ${CARD_STYLES.header}
+        ${props.class ?? ""}
+      `}
+    >
+      {props.children}
+    </div>
+  );
+}
+
+export function CardBody(props: CardBodyProps) {
+  return (
+    <div
+      class={`
+        ${CARD_STYLES.body}
+        ${props.class ?? ""}
+      `}
+    >
+      {props.children}
+    </div>
+  );
+}
+
+export function CardFooter(props: CardFooterProps) {
+  return (
+    <div
+      class={`
+        ${CARD_STYLES.footer}
+        ${props.class ?? ""}
+      `}
+    >
+      {props.children}
+    </div>
+  );
+}
+

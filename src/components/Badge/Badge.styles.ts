@@ -1,4 +1,4 @@
-import {Theme} from "../../config/Brand/index";
+import {Theme} from "@/config/Brand";
 
 import type { BadgeShape, BadgeSize, BadgeVariant } from "./Badge.types";
 

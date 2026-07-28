@@ -14,7 +14,7 @@ import { useTableSorting } from "./useSorting";
 import { useTableFiltering } from "./useFiltering";
 import { useTablePagination } from "./usePagination";
 
-export default function Table<TData>(props: TableProps<TData>) {
+export function Table<TData>(props: TableProps<TData>) {
   const [args, nativeProps] = splitProps(props, [
     "data",
     "columns",

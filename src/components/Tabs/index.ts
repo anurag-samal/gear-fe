@@ -1,3 +1,3 @@
-export { default as Tabs } from "./Tabs";
+export * from "./Tabs";
 
 export type * from "./Tabs.types";

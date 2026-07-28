@@ -1,14 +1,14 @@
 import { splitProps, Show } from "solid-js";
 import type { ButtonProps } from "./Button.types";
-import {Theme} from "../../config/Brand/index";
-import Spinner from "../Spinner/Spinner";
+import {Theme} from "@/config/Brand";
+import {Spinner} from "@/components/Spinner";
 import {
   BASE_BUTTON_CLASS,
   BUTTON_SIZES,
   BUTTON_VARIANTS,
 } from "./Button.styles";
 
-export default function Button(props: ButtonProps) {
+export function Button(props: ButtonProps) {
 
   const theme = Theme.getTheme();
 

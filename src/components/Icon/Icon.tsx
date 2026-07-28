@@ -1,7 +1,5 @@
 import type { Component } from "solid-js";
-
 import type { IconProps } from "./Icon.types";
-
 import { ICON_STYLES } from "./Icon.styles";
 
 export function createIcon(

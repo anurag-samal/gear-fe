@@ -1,13 +1,17 @@
-import type { JSX } from "solid-js";
+import type { ParentProps } from "solid-js";
 
-export interface CardComponentProps extends JSX.HTMLAttributes<HTMLDivElement> {
-  children: JSX.Element;
+export interface CardProps extends ParentProps {
+  class?: string;
 }
 
-export interface CardTitleProps extends JSX.HTMLAttributes<HTMLHeadingElement> {
-  children: JSX.Element;
+export interface CardHeaderProps extends ParentProps {
+  class?: string;
 }
 
-export interface CardDescriptionProps extends JSX.HTMLAttributes<HTMLParagraphElement> {
-  children: JSX.Element;
+export interface CardBodyProps extends ParentProps {
+  class?: string;
+}
+
+export interface CardFooterProps extends ParentProps {
+  class?: string;
 }

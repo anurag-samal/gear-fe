@@ -4,7 +4,7 @@ import type { ProgressDonutProps } from "./ProgressDonut.types";
 
 import { Theme } from "../../config/Brand/index";
 
-export default function ProgressDonut(props: ProgressDonutProps) {
+export function ProgressDonut(props: ProgressDonutProps) {
 
   const theme = Theme.getTheme();
 

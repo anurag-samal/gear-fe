@@ -6,7 +6,7 @@ import type { TabsProps } from "./Tabs.types";
 
 import { TABS_STYLES } from "./Tabs.styles";
 
-function Tabs(props: TabsProps) {
+export function Tabs(props: TabsProps) {
   return (
     <KTabs.Root
       value={props.value}
@@ -47,5 +47,3 @@ function Tabs(props: TabsProps) {
     </KTabs.Root>
   );
 }
-
-export default Tabs;

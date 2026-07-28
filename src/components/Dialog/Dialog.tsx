@@ -1,15 +1,11 @@
 import * as KDialog from "@kobalte/core/dialog";
-
 import { For, Show } from "solid-js";
-
-import Button from "../Button/Button";
+import { Button } from "@/components/Button/Button";
 import { Icon } from "../Icon";
-
 import type { DialogProps } from "./Dialog.types";
-
 import { DIALOG_STYLES } from "./Dialog.styles";
 
-function Dialog(props: DialogProps) {
+export function Dialog(props: DialogProps) {
   return (
     <KDialog.Root
       open={props.open}
@@ -66,5 +62,3 @@ function Dialog(props: DialogProps) {
     </KDialog.Root>
   );
 }
-
-export default Dialog;

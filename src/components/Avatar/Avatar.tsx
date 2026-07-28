@@ -4,7 +4,7 @@ import type { AvatarProps } from "./Avatar.types";
 
 import { AVATAR_SIZES, BASE_AVATAR_CLASS, getInitials } from "./Avatar.styles";
 
-export default function Avatar(props: AvatarProps) {
+export function Avatar(props: AvatarProps) {
   const [args, nativeProps] = splitProps(props, [
     "src",
     "alt",

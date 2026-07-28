@@ -8,7 +8,7 @@ import type { AccordionProps } from "./Accordion.types";
 
 import { ACCORDION_STYLES } from "./Accordion.styles";
 
-function Accordion(props: AccordionProps) {
+export function Accordion(props: AccordionProps) {
   return (
     <KAccordion.Root
       multiple={props.multiple}
@@ -48,4 +48,3 @@ function Accordion(props: AccordionProps) {
   );
 }
 
-export default Accordion;

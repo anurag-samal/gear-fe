@@ -11,7 +11,7 @@ import {
   CHECKBOX_ERROR_CLASS,
 } from "./CheckBox.styles";
 
-export default function Checkbox(props: CheckboxProps) {
+export function Checkbox(props: CheckboxProps) {
   const [args, nativeProps] = splitProps(props, [
     "label",
     "helperText",

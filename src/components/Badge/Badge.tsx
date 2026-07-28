@@ -9,7 +9,7 @@ import {
   BADGE_STYLES,
 } from "./Badge.styles";
 
-export default function Badge(props: BadgeProps) {
+export function Badge(props: BadgeProps) {
   const [args, nativeProps] = splitProps(props, [
     "variant",
     "size",
