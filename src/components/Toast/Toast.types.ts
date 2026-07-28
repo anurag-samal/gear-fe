@@ -14,7 +14,7 @@ export interface ToastData {
   duration: number;
 }
 
-export interface ToastProps extends ComponentProps<"div"> {}
+export type ToastProps = ComponentProps<"div">;
 
 export interface ToastItemProps {
   toast: ToastData;

@@ -1,26 +1,25 @@
 import * as KTabs from "@kobalte/core/tabs";
 
-import { For } from "solid-js";
+import { For, createMemo, splitProps } from "solid-js";
 
 import type { TabsProps } from "./Tabs.types";
 
 import { TABS_STYLES } from "./Tabs.styles";
 
 export function Tabs(props: TabsProps) {
+  const [args, nativeProps] = splitProps(props, ["tabs", "class"]);
+
+  const tabsClass = createMemo(
+    () => `
+      ${TABS_STYLES.root}
+      ${args.class ?? ""}
+    `,
+  );
+
   return (
-    <KTabs.Root
-      value={props.value}
-      defaultValue={props.defaultValue}
-      onChange={props.onChange}
-      orientation={props.orientation}
-      activationMode={props.activationMode}
-      class={`
-        ${TABS_STYLES.root}
-        ${props.class ?? ""}
-      `}
-    >
+    <KTabs.Root {...nativeProps} class={tabsClass()}>
       <KTabs.List class={TABS_STYLES.list}>
-        <For each={props.tabs}>
+        <For each={args.tabs}>
           {(tab) => (
             <KTabs.Trigger
               value={tab.id}
@@ -37,7 +36,7 @@ export function Tabs(props: TabsProps) {
         </For>
       </KTabs.List>
 
-      <For each={props.tabs}>
+      <For each={args.tabs}>
         {(tab) => (
           <KTabs.Content value={tab.id} class={TABS_STYLES.content}>
             {tab.content}

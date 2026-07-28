@@ -1,4 +1,4 @@
-import Table from "../../components/Table/Table";
+import {Table} from "@/components/Table";
 
 const users = [
   { id: 1, name: "Anurag", role: "Admin" },

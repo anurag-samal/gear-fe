@@ -1,3 +1,5 @@
+import { createMemo, splitProps } from "solid-js";
+
 import type {
   CardBodyProps,
   CardFooterProps,
@@ -8,54 +10,81 @@ import type {
 import { CARD_STYLES } from "./Card.styles";
 
 export function Card(props: CardProps) {
+  const [args, nativeProps] = splitProps(props, ["children", "class"]);
+
+  const cardClass = createMemo(
+    () => `
+      ${CARD_STYLES.root}
+      ${args.class ?? ""}
+    `,
+  );
+
   return (
     <div
-      class={`
-        ${CARD_STYLES.root}
-        ${props.class ?? ""}
-      `}
+      {...nativeProps}
+      class={cardClass()}
     >
-      {props.children}
+      {args.children}
     </div>
   );
 }
 
 export function CardHeader(props: CardHeaderProps) {
+  const [args, nativeProps] = splitProps(props, ["children", "class"]);
+
+  const cardHeaderClass = createMemo(
+    () => `
+      ${CARD_STYLES.header}
+      ${args.class ?? ""}
+    `,
+  );
+
   return (
     <div
-      class={`
-        ${CARD_STYLES.header}
-        ${props.class ?? ""}
-      `}
+      {...nativeProps}
+      class={cardHeaderClass()}
     >
-      {props.children}
+      {args.children}
     </div>
   );
 }
 
 export function CardBody(props: CardBodyProps) {
+  const [args, nativeProps] = splitProps(props, ["children", "class"]);
+
+  const cardBodyClass = createMemo(
+    () => `
+      ${CARD_STYLES.body}
+      ${args.class ?? ""}
+    `,
+  );
+
   return (
     <div
-      class={`
-        ${CARD_STYLES.body}
-        ${props.class ?? ""}
-      `}
+      {...nativeProps}
+      class={cardBodyClass()}
     >
-      {props.children}
+      {args.children}
     </div>
   );
 }
 
 export function CardFooter(props: CardFooterProps) {
+  const [args, nativeProps] = splitProps(props, ["children", "class"]);
+
+  const cardFooterClass = createMemo(
+    () => `
+      ${CARD_STYLES.footer}
+      ${args.class ?? ""}
+    `,
+  );
+
   return (
     <div
-      class={`
-        ${CARD_STYLES.footer}
-        ${props.class ?? ""}
-      `}
+      {...nativeProps}
+      class={cardFooterClass()}
     >
-      {props.children}
+      {args.children}
     </div>
   );
 }
-

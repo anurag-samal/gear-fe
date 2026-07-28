@@ -1,4 +1,9 @@
-import { Show, createUniqueId, splitProps } from "solid-js";
+import {
+  Show,
+  createMemo,
+  createUniqueId,
+  splitProps,
+} from "solid-js";
 
 import type { CheckboxProps } from "./CheckBox.types";
 
@@ -19,46 +24,47 @@ export function Checkbox(props: CheckboxProps) {
     "class",
   ]);
 
-  const checkboxId = nativeProps.id ?? createUniqueId();
+  const checkboxId = createMemo(
+    () => nativeProps.id ?? createUniqueId(),
+  );
 
-  const containerClass = `
-    ${CHECKBOX_CONTAINER_CLASS}
-    ${args.class ?? ""}
-  `;
-
-  const wrapperClass = CHECKBOX_WRAPPER_CLASS;
-
-  const checkboxClass = CHECKBOX_FIELD_CLASS;
-
-  const labelClass = CHECKBOX_LABEL_CLASS;
-
-  const helperClass = CHECKBOX_HELPER_CLASS;
-
-  const errorClass = CHECKBOX_ERROR_CLASS;
+  const containerClass = createMemo(
+    () => `
+      ${CHECKBOX_CONTAINER_CLASS}
+      ${args.class ?? ""}
+    `,
+  );
 
   return (
-    <div class={containerClass}>
-      <div class={wrapperClass}>
+    <div class={containerClass()}>
+      <div class={CHECKBOX_WRAPPER_CLASS}>
         <input
           {...nativeProps}
-          id={checkboxId}
+          id={checkboxId()}
           type="checkbox"
-          class={checkboxClass}
+          class={CHECKBOX_FIELD_CLASS}
         />
 
         <Show when={args.label}>
-          <label for={checkboxId} class={labelClass}>
+          <label
+            for={checkboxId()}
+            class={CHECKBOX_LABEL_CLASS}
+          >
             {args.label}
           </label>
         </Show>
       </div>
 
       <Show when={args.error}>
-        <p class={errorClass}>{args.error}</p>
+        <p class={CHECKBOX_ERROR_CLASS}>
+          {args.error}
+        </p>
       </Show>
 
       <Show when={!args.error && args.helperText}>
-        <p class={helperClass}>{args.helperText}</p>
+        <p class={CHECKBOX_HELPER_CLASS}>
+          {args.helperText}
+        </p>
       </Show>
     </div>
   );

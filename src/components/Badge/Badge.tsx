@@ -1,4 +1,4 @@
-import { Show, splitProps } from "solid-js";
+import { Show, createMemo, splitProps } from "solid-js";
 
 import type { BadgeProps } from "./Badge.types";
 
@@ -21,23 +21,25 @@ export function Badge(props: BadgeProps) {
     "class",
   ]);
 
-  const badgeClass = `
-    ${BASE_BADGE_CLASS}
-    ${BADGE_SIZES[args.size ?? "md"]}
-    ${BADGE_SHAPES[args.shape ?? "rounded"]}
-    ${args.class ?? ""}
-  `;
+  const badgeClass = createMemo(
+    () => `
+      ${BASE_BADGE_CLASS}
+      ${BADGE_SIZES[args.size ?? "md"]}
+      ${BADGE_SHAPES[args.shape ?? "rounded"]}
+      ${args.class ?? ""}
+    `,
+  );
 
-  const badgeStyle = {
+  const badgeStyle = createMemo(() => ({
     background: BADGE_STYLES[args.variant ?? "primary"].background,
     color: BADGE_STYLES[args.variant ?? "primary"].color,
-  };
+  }));
 
   return (
     <span
       {...nativeProps}
-      class={badgeClass}
-      style={badgeStyle}
+      class={badgeClass()}
+      style={badgeStyle()}
     >
       <Show when={args.dot}>
         <span class="h-2 w-2 rounded-full bg-current" />

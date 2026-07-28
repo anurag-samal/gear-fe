@@ -23,8 +23,11 @@ jobs:
 
       - uses: ./.github/actions/setup
 
+      - name: Lint
+        run: npm run lint
+
       - name: Type check
-        run: npx tsc --noEmit
+        run: npm run typecheck
 
       - name: Audit dependencies
         if: github.base_ref == 'main'

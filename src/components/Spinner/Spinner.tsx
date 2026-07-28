@@ -1,4 +1,4 @@
-import { splitProps } from "solid-js";
+import { createMemo, splitProps } from "solid-js";
 
 import type { SpinnerProps } from "./Spinner.types";
 
@@ -11,13 +11,19 @@ import {
 export function Spinner(props: SpinnerProps) {
   const [args, nativeProps] = splitProps(props, ["size", "color", "class"]);
 
-  const spinnerClass = `
-    ${SPINNER_BASE_CLASS}
-    ${SPINNER_SIZES[args.size ?? "md"]}
-    ${args.class ?? ""}
-  `;
+  const spinnerClass = createMemo(
+    () => `
+      ${SPINNER_BASE_CLASS}
+      ${SPINNER_SIZES[args.size ?? "md"]}
+      ${args.class ?? ""}
+    `,
+  );
 
-  const spinnerStyle = SPINNER_STYLES[args.color ?? "current"];
+  const spinnerStyle = createMemo(
+    () => SPINNER_STYLES[args.color ?? "current"],
+  );
 
-  return <span {...nativeProps} class={spinnerClass} style={spinnerStyle} />;
+  return (
+    <span {...nativeProps} class={spinnerClass()} style={spinnerStyle()} />
+  );
 }

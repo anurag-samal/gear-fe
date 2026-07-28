@@ -1,22 +1,41 @@
+import { createMemo, splitProps } from "solid-js";
+
 import type { Component } from "solid-js";
+
 import type { IconProps } from "./Icon.types";
+
 import { ICON_STYLES } from "./Icon.styles";
 
 export function createIcon(
   LucideIcon: Component<IconProps>,
 ): Component<IconProps> {
-  return (props) => (
-    <LucideIcon
-      {...props}
-      class={`
+  return (props) => {
+    const [args, nativeProps] = splitProps(props, [
+      "class",
+      "size",
+      "color",
+      "fill",
+      "strokeWidth",
+      "absoluteStrokeWidth",
+    ]);
+
+    const iconClass = createMemo(
+      () => `
         ${ICON_STYLES.base}
-        ${props.class ?? ""}
-      `}
-      size={props.size ?? 18}
-      color={props.color}
-      fill={props.fill}
-      strokeWidth={props.strokeWidth ?? 2}
-      absoluteStrokeWidth={props.absoluteStrokeWidth}
-    />
-  );
+        ${args.class ?? ""}
+      `,
+    );
+
+    return (
+      <LucideIcon
+        {...nativeProps}
+        class={iconClass()}
+        size={args.size ?? 18}
+        color={args.color}
+        fill={args.fill}
+        strokeWidth={args.strokeWidth ?? 2}
+        absoluteStrokeWidth={args.absoluteStrokeWidth}
+      />
+    );
+  };
 }

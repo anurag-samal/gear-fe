@@ -13,16 +13,18 @@ export function Avatar(props: AvatarProps) {
     "class",
   ]);
 
-  const avatarClass = `
-    ${BASE_AVATAR_CLASS}
-    ${AVATAR_SIZES[args.size ?? "md"]}
-    ${args.class ?? ""}
-  `;
+  const avatarClass = createMemo(
+    () => `
+      ${BASE_AVATAR_CLASS}
+      ${AVATAR_SIZES[args.size ?? "md"]}
+      ${args.class ?? ""}
+    `,
+  );
 
   const initials = createMemo(() => getInitials(args.name));
 
   return (
-    <div class={avatarClass}>
+    <div class={avatarClass()}>
       <Switch>
         <Match when={args.src}>
           <img
