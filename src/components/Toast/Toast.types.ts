@@ -1,21 +1,21 @@
-import type { JSX } from "solid-js";
+import type { ComponentProps } from "solid-js";
 
 export type ToastVariant = "success" | "error" | "warning" | "info";
 
 export interface ToastData {
   id: string;
 
+  variant: ToastVariant;
+
   title: string;
 
   description?: string;
 
-  variant: ToastVariant;
-
-  duration?: number;
+  duration: number;
 }
 
-export interface ToastProps extends JSX.HTMLAttributes<HTMLDivElement> {
+export type ToastProps = ComponentProps<"div">;
+
+export interface ToastItemProps {
   toast: ToastData;
 }
-
-export interface ToastContainerProps extends JSX.HTMLAttributes<HTMLDivElement> {}

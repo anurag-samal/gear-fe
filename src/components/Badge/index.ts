@@ -1,2 +1,3 @@
-export { default } from "./Badge";
 export type * from "./Badge.types";
+
+export * from "./Badge";

@@ -1,4 +1,4 @@
-import { Show, createUniqueId, splitProps } from "solid-js";
+import { Show, createMemo, createUniqueId, splitProps } from "solid-js";
 
 import type { SwitchProps } from "./Switch.types";
 
@@ -13,7 +13,7 @@ import {
   SWITCH_ERROR_CLASS,
 } from "./Switch.styles";
 
-export default function Switch(props: SwitchProps) {
+export function Switch(props: SwitchProps) {
   const [args, nativeProps] = splitProps(props, [
     "label",
     "helperText",
@@ -21,52 +21,40 @@ export default function Switch(props: SwitchProps) {
     "class",
   ]);
 
-  const switchId = nativeProps.id ?? createUniqueId();
+  const switchId = createMemo(() => nativeProps.id ?? createUniqueId());
 
-  const containerClass = `
-    ${SWITCH_CONTAINER_CLASS}
-    ${args.class ?? ""}
-  `;
-
-  const wrapperClass = SWITCH_WRAPPER_CLASS;
-
-  const inputClass = SWITCH_INPUT_CLASS;
-
-  const trackClass = SWITCH_TRACK_CLASS;
-
-  const thumbClass = SWITCH_THUMB_CLASS;
-
-  const labelClass = SWITCH_LABEL_CLASS;
-
-  const helperClass = SWITCH_HELPER_CLASS;
-
-  const errorClass = SWITCH_ERROR_CLASS;
+  const containerClass = createMemo(
+    () => `
+      ${SWITCH_CONTAINER_CLASS}
+      ${args.class ?? ""}
+    `,
+  );
 
   return (
-    <div class={containerClass}>
-      <label class={wrapperClass}>
+    <div class={containerClass()}>
+      <label class={SWITCH_WRAPPER_CLASS}>
         <input
           {...nativeProps}
-          id={switchId}
+          id={switchId()}
           type="checkbox"
-          class={inputClass}
+          class={SWITCH_INPUT_CLASS}
         />
 
-        <div class={trackClass}>
-          <div class={thumbClass} />
+        <div class={SWITCH_TRACK_CLASS}>
+          <div class={SWITCH_THUMB_CLASS} />
         </div>
 
         <Show when={args.label}>
-          <span class={labelClass}>{args.label}</span>
+          <span class={SWITCH_LABEL_CLASS}>{args.label}</span>
         </Show>
       </label>
 
       <Show when={args.error}>
-        <p class={errorClass}>{args.error}</p>
+        <p class={SWITCH_ERROR_CLASS}>{args.error}</p>
       </Show>
 
       <Show when={!args.error && args.helperText}>
-        <p class={helperClass}>{args.helperText}</p>
+        <p class={SWITCH_HELPER_CLASS}>{args.helperText}</p>
       </Show>
     </div>
   );

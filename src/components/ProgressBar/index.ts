@@ -1,2 +1,3 @@
-export { default } from "./ProgressBar";
 export type * from "./ProgressBar.types";
+
+export * from "./ProgressBar";

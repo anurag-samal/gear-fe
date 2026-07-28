@@ -1,2 +1,3 @@
-export { default } from "./ProgressDonut";
 export type * from "./ProgressDonut.types";
+
+export * from "./ProgressDonut";

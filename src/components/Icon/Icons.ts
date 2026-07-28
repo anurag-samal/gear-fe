@@ -109,5 +109,3 @@ export const Icon = {
 
   ChevronDown: createIcon(ChevronDown),
 } as const;
-
-export default Icon;

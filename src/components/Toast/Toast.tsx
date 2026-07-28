@@ -1,35 +1,31 @@
-import { Show, splitProps } from "solid-js";
+import { For, Show, createMemo, splitProps } from "solid-js";
 
-import type { ToastProps } from "./Toast.types";
+import type { ToastItemProps, ToastProps } from "./Toast.types";
 
-import { toast } from "./ToastStore";
+import { toast, toasts } from "./ToastStore";
 
 import { TOAST_ICONS, TOAST_STYLES } from "./Toast.styles";
 
-export default function Toast(props: ToastProps) {
-  const [args, nativeProps] = splitProps(props, ["toast", "class"]);
+function ToastItem(props: ToastItemProps) {
+  const [args] = splitProps(props, ["toast"]);
 
-  const rootClass = `
-    ${TOAST_STYLES.root}
-    ${args.class ?? ""}
-  `;
+  const rootStyle = createMemo(() => ({
+    backgroundColor: "var(--theme-surface)",
+    borderColor: "var(--theme-border)",
+    color: "var(--theme-text)",
+  }));
+
+  const iconStyle = createMemo(() => ({
+    color: `var(--theme-${args.toast.variant})`,
+  }));
+
+  const closeStyle = createMemo(() => ({
+    color: "var(--theme-text-muted)",
+  }));
 
   return (
-    <div
-      {...nativeProps}
-      class={rootClass}
-      style={{
-        "background-color": "var(--theme-surface)",
-        "border-color": "var(--theme-border)",
-        color: "var(--theme-text)",
-      }}
-    >
-      <div
-        class={TOAST_STYLES.icon}
-        style={{
-          color: `var(--theme-${args.toast.variant})`,
-        }}
-      >
+    <div class={TOAST_STYLES.root} style={rootStyle()}>
+      <div class={TOAST_STYLES.icon} style={iconStyle()}>
         {TOAST_ICONS[args.toast.variant]}
       </div>
 
@@ -45,12 +41,27 @@ export default function Toast(props: ToastProps) {
         type="button"
         class={TOAST_STYLES.close}
         onClick={() => toast.dismiss(args.toast.id)}
-        style={{
-          color: "var(--theme-text-muted)",
-        }}
+        style={closeStyle()}
       >
         ✕
       </button>
+    </div>
+  );
+}
+
+export function Toast(props: ToastProps) {
+  const [args, nativeProps] = splitProps(props, ["class"]);
+
+  const containerClass = createMemo(
+    () => `
+      ${TOAST_STYLES.container}
+      ${args.class ?? ""}
+    `,
+  );
+
+  return (
+    <div {...nativeProps} class={containerClass()}>
+      <For each={toasts()}>{(toast) => <ToastItem toast={toast} />}</For>
     </div>
   );
 }

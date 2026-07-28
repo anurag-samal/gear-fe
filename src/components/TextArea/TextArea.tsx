@@ -1,4 +1,4 @@
-import { Show, createUniqueId, splitProps } from "solid-js";
+import { Show, createMemo, createUniqueId, splitProps } from "solid-js";
 
 import type { TextAreaProps } from "./TextArea.types";
 
@@ -13,7 +13,7 @@ import {
   TEXTAREA_RESIZE,
 } from "./TextArea.styles";
 
-export default function TextArea(props: TextAreaProps) {
+export function TextArea(props: TextAreaProps) {
   const [args, nativeProps] = splitProps(props, [
     "label",
     "helperText",
@@ -23,47 +23,41 @@ export default function TextArea(props: TextAreaProps) {
     "class",
   ]);
 
-  const textAreaId = nativeProps.id ?? createUniqueId();
+  const textAreaId = createMemo(() => nativeProps.id ?? createUniqueId());
 
-  const containerClass = `
-    ${TEXTAREA_CONTAINER_CLASS}
-    ${args.class ?? ""}
-  `;
+  const containerClass = createMemo(
+    () => `
+      ${TEXTAREA_CONTAINER_CLASS}
+      ${args.class ?? ""}
+    `,
+  );
 
-  const wrapperClass = `
-    ${TEXTAREA_WRAPPER_CLASS}
-  `;
-
-  const textAreaClass = `
-    ${TEXTAREA_FIELD_CLASS}
-    ${TEXTAREA_SIZES[args.size ?? "md"]}
-    ${TEXTAREA_RESIZE[args.resize ?? "vertical"]}
-  `;
-
-  const labelClass = TEXTAREA_LABEL_CLASS;
-
-  const helperClass = TEXTAREA_HELPER_CLASS;
-
-  const errorClass = TEXTAREA_ERROR_CLASS;
+  const textAreaClass = createMemo(
+    () => `
+      ${TEXTAREA_FIELD_CLASS}
+      ${TEXTAREA_SIZES[args.size ?? "md"]}
+      ${TEXTAREA_RESIZE[args.resize ?? "vertical"]}
+    `,
+  );
 
   return (
-    <div class={containerClass}>
+    <div class={containerClass()}>
       <Show when={args.label}>
-        <label for={textAreaId} class={labelClass}>
+        <label for={textAreaId()} class={TEXTAREA_LABEL_CLASS}>
           {args.label}
         </label>
       </Show>
 
-      <div class={wrapperClass}>
-        <textarea {...nativeProps} id={textAreaId} class={textAreaClass} />
+      <div class={TEXTAREA_WRAPPER_CLASS}>
+        <textarea {...nativeProps} id={textAreaId()} class={textAreaClass()} />
       </div>
 
       <Show when={args.error}>
-        <p class={errorClass}>{args.error}</p>
+        <p class={TEXTAREA_ERROR_CLASS}>{args.error}</p>
       </Show>
 
       <Show when={!args.error && args.helperText}>
-        <p class={helperClass}>{args.helperText}</p>
+        <p class={TEXTAREA_HELPER_CLASS}>{args.helperText}</p>
       </Show>
     </div>
   );

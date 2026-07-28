@@ -1,5 +1,5 @@
-export { default as Toast } from "./Toast";
+export * from "./Toast";
 
-export { default as ToastContainer } from "./ToastContainer";
+export * from "./ToastStore";
 
-export { toast } from "./ToastStore";
+export type * from "./Toast.types";

@@ -1,27 +1,28 @@
 import * as KAccordion from "@kobalte/core/accordion";
 
-import { For } from "solid-js";
+import { For, splitProps } from "solid-js";
 
-import { Icon } from "../Icon";
+import { Icon } from "@/components/Icon";
 
 import type { AccordionProps } from "./Accordion.types";
 
 import { ACCORDION_STYLES } from "./Accordion.styles";
 
-function Accordion(props: AccordionProps) {
+export function Accordion(props: AccordionProps) {
+  const [args, nativeProps] = splitProps(props, [
+    "items",
+    "class",
+  ]);
+
   return (
     <KAccordion.Root
-      multiple={props.multiple}
-      collapsible={props.collapsible}
-      value={props.value}
-      defaultValue={props.defaultValue}
-      onChange={props.onChange}
+      {...nativeProps}
       class={`
         ${ACCORDION_STYLES.root}
-        ${props.class ?? ""}
+        ${args.class ?? ""}
       `}
     >
-      <For each={props.items}>
+      <For each={args.items}>
         {(item) => (
           <KAccordion.Item
             value={item.id}
@@ -31,7 +32,6 @@ function Accordion(props: AccordionProps) {
             <KAccordion.Trigger class={ACCORDION_STYLES.trigger}>
               <div class={ACCORDION_STYLES.title}>
                 {item.leftIcon}
-
                 {item.title}
               </div>
 
@@ -47,5 +47,3 @@ function Accordion(props: AccordionProps) {
     </KAccordion.Root>
   );
 }
-
-export default Accordion;

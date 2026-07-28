@@ -1,4 +1,4 @@
-import { For, Show, createMemo, splitProps } from "solid-js";
+import { For, Show, createMemo, splitProps, untrack } from "solid-js";
 
 import {
   createSolidTable,
@@ -14,7 +14,7 @@ import { useTableSorting } from "./useSorting";
 import { useTableFiltering } from "./useFiltering";
 import { useTablePagination } from "./usePagination";
 
-export default function Table<TData>(props: TableProps<TData>) {
+export function Table<TData>(props: TableProps<TData>) {
   const [args, nativeProps] = splitProps(props, [
     "data",
     "columns",
@@ -27,16 +27,16 @@ export default function Table<TData>(props: TableProps<TData>) {
     "initialPageSize",
   ]);
 
-  const sorting = useTableSorting<TData>(args.sorting ?? false);
+  const sorting = useTableSorting<TData>(untrack(() => args.sorting ?? false));
 
   const filtering = useTableFiltering<TData>(
-    args.filtering ?? false,
-    args.searching ?? false,
+    untrack(() => args.filtering ?? false),
+    untrack(() => args.searching ?? false),
   );
 
   const pagination = useTablePagination<TData>(
-    args.pagination ?? false,
-    args.initialPageSize ?? 10,
+    untrack(() => args.pagination ?? false),
+    untrack(() => args.initialPageSize ?? 10),
   );
 
   const table = createMemo(() =>
@@ -67,14 +67,15 @@ export default function Table<TData>(props: TableProps<TData>) {
     }),
   );
 
+  const tableClass = createMemo(
+    () => `
+      ${TABLE_STYLES.root}
+      ${args.class ?? ""}
+    `,
+  );
+
   return (
-    <div
-      {...nativeProps}
-      class={`
-        ${TABLE_STYLES.root}
-        ${args.class ?? ""}
-      `}
-    >
+    <div {...nativeProps} class={tableClass()}>
       <table class={TABLE_STYLES.table}>
         <thead>
           <For each={table().getHeaderGroups()}>

@@ -1,3 +1,3 @@
-export { default as Dialog } from "./Dialog";
+export * from "./Dialog";
 
 export type * from "./Dialog.types";

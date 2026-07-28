@@ -1,13 +1,14 @@
-import { defineConfig } from "vitest/config";
-import solid from "vite-plugin-solid";
+import { defineConfig } from "vite";
+import { nitroV2Plugin as nitro } from "@solidjs/vite-plugin-nitro-2";
+import { solidStart } from "@solidjs/start/config";
+import tailwindcss from "@tailwindcss/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [solid(), tsconfigPaths()],
-  test: {
-    environment: "jsdom",
-    globals: true,
-    setupFiles: ["./src/test-setup.ts"],
-    css: true,
-  },
+  plugins: [
+    solidStart(),
+    tailwindcss(),
+    nitro(),
+    tsconfigPaths(),
+  ],
 });

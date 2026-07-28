@@ -35,6 +35,7 @@ class Font {
 
   private static readonly DEFAULT_FONT = "Mechanical";
 
+  // eslint-disable-next-line solid/reactivity
   private static readonly fontSignal = createSignal<
     keyof typeof Font.FONT_GROUPS
   >(Font.DEFAULT_FONT);

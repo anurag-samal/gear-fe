@@ -205,6 +205,7 @@ class Theme {
 
   private static readonly DEFAULT_THEME = "Indigo";
 
+  // eslint-disable-next-line solid/reactivity
   private static readonly themeSignal = createSignal<keyof typeof Theme.THEMES>(Theme.DEFAULT_THEME);
 
   private static get _theme() {

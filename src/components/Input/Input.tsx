@@ -1,4 +1,4 @@
-import { Show, createUniqueId, splitProps } from "solid-js";
+import { Show, createMemo, createUniqueId, splitProps } from "solid-js";
 
 import type { InputProps } from "./Input.types";
 
@@ -12,7 +12,7 @@ import {
   INPUT_WRAPPER_CLASS,
 } from "./Input.styles";
 
-export default function Input(props: InputProps) {
+export function Input(props: InputProps) {
   const [args, nativeProps] = splitProps(props, [
     "label",
     "helperText",
@@ -23,42 +23,38 @@ export default function Input(props: InputProps) {
     "class",
   ]);
 
-  const inputId = nativeProps.id ?? createUniqueId();
+  const inputId = createMemo(() => nativeProps.id ?? createUniqueId());
 
-  const containerClass = `
-    ${INPUT_CONTAINER_CLASS}
-    ${args.class ?? ""}
-  `;
+  const containerClass = createMemo(
+    () => `
+      ${INPUT_CONTAINER_CLASS}
+      ${args.class ?? ""}
+    `,
+  );
 
-  const wrapperClass = `
-    ${INPUT_WRAPPER_CLASS}
-    ${INPUT_SIZES[args.size ?? "md"]}
-  `;
-
-  const inputClass = INPUT_FIELD_CLASS;
-
-  const labelClass = INPUT_LABEL_CLASS;
-
-  const helperClass = INPUT_HELPER_CLASS;
-
-  const errorClass = INPUT_ERROR_CLASS;
+  const wrapperClass = createMemo(
+    () => `
+      ${INPUT_WRAPPER_CLASS}
+      ${INPUT_SIZES[args.size ?? "md"]}
+    `,
+  );
 
   return (
-    <div class={containerClass}>
+    <div class={containerClass()}>
       <Show when={args.label}>
-        <label for={inputId} class={labelClass}>
+        <label for={inputId()} class={INPUT_LABEL_CLASS}>
           {args.label}
         </label>
       </Show>
 
-      <div class={wrapperClass}>
+      <div class={wrapperClass()}>
         <Show when={args.leftIcon}>
           <span class="flex items-center justify-center text-zinc-500">
             {args.leftIcon}
           </span>
         </Show>
 
-        <input {...nativeProps} id={inputId} class={inputClass} />
+        <input {...nativeProps} id={inputId()} class={INPUT_FIELD_CLASS} />
 
         <Show when={args.rightIcon}>
           <span class="flex items-center justify-center text-zinc-500">
@@ -68,11 +64,11 @@ export default function Input(props: InputProps) {
       </div>
 
       <Show when={args.error}>
-        <p class={errorClass}>{args.error}</p>
+        <p class={INPUT_ERROR_CLASS}>{args.error}</p>
       </Show>
 
       <Show when={!args.error && args.helperText}>
-        <p class={helperClass}>{args.helperText}</p>
+        <p class={INPUT_HELPER_CLASS}>{args.helperText}</p>
       </Show>
     </div>
   );
