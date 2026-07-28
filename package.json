@@ -7,6 +7,8 @@
     "build": "vite build",
     "start": "vite start",
     "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -26,6 +28,8 @@
     "@solidjs/testing-library": "^0.8.10",
     "@tailwindcss/vite": "^4.0.7",
     "@testing-library/jest-dom": "^7.0.0",
+    "eslint": "^10.8.0",
+    "eslint-plugin-solid": "^0.14.5",
     "jsdom": "^30.0.0",
     "tailwindcss": "^4.0.7",
     "vite-plugin-solid": "^2.11.14",
