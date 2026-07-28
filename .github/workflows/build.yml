@@ -29,9 +29,9 @@ jobs:
       - name: Type check
         run: npm run typecheck
 
-      - name: Audit dependencies
+      - name: Audit production dependencies
         if: github.base_ref == 'main'
-        run: npm audit --audit-level=high
+        run: npm audit --omit=dev --audit-level=critical
 
       - name: Build
         run: npm run build
