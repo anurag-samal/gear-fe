@@ -1,8 +1,10 @@
-import {Theme} from "@/config/Brand";
+import { Theme } from "@/config/Brand";
 
-import type { BadgeShape, BadgeSize, BadgeVariant } from "./Badge.types";
-
-const theme = Theme.getTheme();
+import type {
+  BadgeShape,
+  BadgeSize,
+  BadgeVariant,
+} from "./Badge.types";
 
 export const BASE_BADGE_CLASS = `
 inline-flex
@@ -34,37 +36,37 @@ export const BADGE_STYLES: Record<
   }
 > = {
   primary: {
-    background: theme.primary,
+    background: Theme.vars.primary,
     color: "#FFFFFF",
   },
 
   secondary: {
-    background: theme.sidebar,
-    color: theme.text,
+    background: Theme.vars.sidebar,
+    color: Theme.vars.text,
   },
 
   success: {
-    background: theme.success,
+    background: Theme.vars.success,
     color: "#FFFFFF",
   },
 
   warning: {
-    background: theme.warning,
+    background: Theme.vars.warning,
     color: "#FFFFFF",
   },
 
   danger: {
-    background: theme.danger,
+    background: Theme.vars.danger,
     color: "#FFFFFF",
   },
 
   info: {
-    background: theme.info ?? "#0EA5E9",
+    background: Theme.vars.info,
     color: "#FFFFFF",
   },
 
   neutral: {
-    background: theme.border,
-    color: theme.text,
+    background: Theme.vars.border,
+    color: Theme.vars.text,
   },
 };

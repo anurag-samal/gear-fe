@@ -49,7 +49,7 @@ function ToastItem(props: ToastItemProps) {
   );
 }
 
-export function Toast(props: ToastProps) {
+export function Toaster(props: ToastProps) {
   const [args, nativeProps] = splitProps(props, ["class"]);
 
   const containerClass = createMemo(

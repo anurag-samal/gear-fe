@@ -10,7 +10,6 @@ import {
   BASE_PROGRESS_CLASS,
 } from "./ProgressBar.styles";
 
-const theme = Theme.getTheme();
 
 export function Progress(props: ProgressProps) {
   const [args, nativeProps] = splitProps(props, [
@@ -39,7 +38,7 @@ export function Progress(props: ProgressProps) {
 
   const progressBarStyle = createMemo<JSX.CSSProperties>(() => ({
     width: `${percentage()}%`,
-    backgroundColor: theme.primary,
+    backgroundColor: Theme.vars.primary,
   }));
 
   return (

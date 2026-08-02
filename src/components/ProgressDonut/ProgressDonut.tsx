@@ -5,7 +5,6 @@ import { Theme } from "@/config/Brand";
 import type { ProgressDonutProps } from "./ProgressDonut.types";
 
 export function ProgressDonut(props: ProgressDonutProps) {
-  const theme = Theme.getTheme();
 
   const [args, nativeProps] = splitProps(props, [
     "value",
@@ -79,7 +78,7 @@ export function ProgressDonut(props: ProgressDonutProps) {
           cy={size() / 2}
           r={radius()}
           fill="none"
-          stroke={theme.primary}
+          stroke={Theme.vars.primary}
           stroke-width={thickness()}
           stroke-linecap="round"
           stroke-dasharray={`${circumference()}`}

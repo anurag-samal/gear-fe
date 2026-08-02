@@ -22,7 +22,7 @@ items-center
 
 gap-3
 
-rounded-xl
+rounded-lg
 
 border
 border-zinc-300

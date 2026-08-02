@@ -1,5 +1,3 @@
-import { createSignal } from "solid-js";
-
 class Theme {
   private static readonly THEMES = {
     SteelBlue: {
@@ -203,18 +201,32 @@ class Theme {
     },
   } as const;
 
-  private static readonly DEFAULT_THEME = "Indigo";
+  static readonly vars = {
+    primary: "var(--theme-primary)",
+    primaryHover: "var(--theme-primaryHover)",
 
-  // eslint-disable-next-line solid/reactivity
-  private static readonly themeSignal = createSignal<keyof typeof Theme.THEMES>(Theme.DEFAULT_THEME);
+    background: "var(--theme-background)",
+    surface: "var(--theme-surface)",
+    sidebar: "var(--theme-sidebar)",
 
-  private static get _theme() {
-    return Theme.themeSignal[0];
-  }
+    border: "var(--theme-border)",
 
-  private static get _setTheme() {
-    return Theme.themeSignal[1];
-  }
+    text: "var(--theme-text)",
+    textMuted: "var(--theme-textMuted)",
+
+    success: "var(--theme-success)",
+    warning: "var(--theme-warning)",
+    danger: "var(--theme-danger)",
+    info: "var(--theme-info)",
+
+    chart1: "var(--theme-chart1)",
+    chart2: "var(--theme-chart2)",
+    chart3: "var(--theme-chart3)",
+    chart4: "var(--theme-chart4)",
+    chart5: "var(--theme-chart5)",
+  } as const;
+
+  static readonly DEFAULT_THEME: keyof typeof Theme.THEMES = "Indigo";
 
   private constructor() {}
 
@@ -224,36 +236,23 @@ class Theme {
     const root = document.documentElement;
 
     for (const [key, value] of Object.entries(theme)) {
-      root.style.setProperty(
-        `--theme-${key}`,
-        value,
-      );
+      root.style.setProperty(`--theme-${key}`, value);
     }
   }
 
-  static {
-    Theme.applyTheme(
-      Theme.THEMES[Theme._theme()],
-    );
+  static apply(theme: keyof typeof Theme.THEMES): void {
+    Theme.applyTheme(Theme.THEMES[theme]);
   }
 
-  static getTheme() {
-    const name = Theme._theme();
-
+  static get(theme: keyof typeof Theme.THEMES = Theme.DEFAULT_THEME) {
     return {
-      name,
-      ...Theme.THEMES[name],
+      name: theme,
+      ...Theme.THEMES[theme],
     };
   }
 
-  static setTheme(
-    theme: keyof typeof Theme.THEMES,
-  ): void {
-    Theme._setTheme(theme);
-
-    Theme.applyTheme(
-      Theme.THEMES[theme],
-    );
+  static get themes() {
+    return Theme.THEMES;
   }
 }
 

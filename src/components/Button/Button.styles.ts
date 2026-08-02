@@ -45,7 +45,7 @@ items-center
 justify-center
 gap-2
 
-rounded-xl
+rounded-lg
 
 font-medium
 

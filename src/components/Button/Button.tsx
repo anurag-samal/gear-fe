@@ -12,7 +12,6 @@ import {
 } from "./Button.styles";
 
 export function Button(props: ButtonProps) {
-  const theme = Theme.getTheme();
 
   const [args, nativeProps] = splitProps(props, [
     "variant",
@@ -36,7 +35,7 @@ export function Button(props: ButtonProps) {
   const buttonStyle = createMemo(() =>
     (args.variant ?? "primary") === "primary"
       ? {
-          backgroundColor: theme.primary,
+          backgroundColor: Theme.vars.primary,
         }
       : undefined,
   );
